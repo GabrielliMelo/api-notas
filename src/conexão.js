@@ -7,7 +7,7 @@ const knex = require('knex')({
         database: process.env.DATABASE_NAME,
         port: process.env.DATABASE_PORT,
         ssl: {
-            rejectUnauthorized: process.env.DATABASE_SSL, // For self-signed certificates
+            rejectUnauthorized: false, // For self-signed certificates
           },
     },
 })
