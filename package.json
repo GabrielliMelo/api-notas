@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,9 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.11",
     "nodemailer": "^6.7.0",
-    "nodemon": "^2.0.14",
     "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }
