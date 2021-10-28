@@ -1,4 +1,5 @@
 const knex = require('../conexão');
+// const nodemailer = require('../nodemailer');
 
 const listar = async (req, res)=>{
     try {
@@ -8,7 +9,6 @@ const listar = async (req, res)=>{
         return res.status(400).json(error.message);
     }
 }
-
 const obter = async (req, res)=>{
     const {id} = req.params;
     
@@ -26,29 +26,41 @@ const obter = async (req, res)=>{
 
 const cadastrar = async (req, res)=>{
     
-        const { nome, email, telefone} = req.body;
+        const { nome, email, telefone, senha} = req.body;
         
             if(!nome){
                  return res.status(400).json({message: "Nome é obrigatorio"});
             }
             if(!email){
-                return res.status(400).json({message: "Nome é obrigatorio"});
+                return res.status(400).json({message: "Email é obrigatorio"});
             }
             if(!telefone){
-                return res.status(400).json({message: "Nome é obrigatorio"});
+                return res.status(400).json({message: "Telefone é obrigatorio"});
+            } 
+            if(!senha){
+                return res.status(400).json({message: "Senha é obrigatorio"});
             }
 
         try {
                 const usuarioNovo = {
                     nome, 
                     email,
-                    telefone
+                    telefone,
+                    senha
                 }
 
             const usuarioCad = await knex('agenda').insert(usuarioNovo).returning('*');
             if(usuarioCad.lenght === 0){
                 return res.status(400).json({message: "Não foi possivel cadastrar usuario"});
             }
+            //     const dadosEnvio = {
+            //         from: 'Gabrielli ',
+            //         to: email,
+            //         subject: 'Bem vindo',
+            //         text: `Olá ${nome}`
+            //     }
+            //   nodemailer.sendMail(dadosEnvio);
+
                 return res.status(200).json(usuarioCad);
 
         } catch (error) {
